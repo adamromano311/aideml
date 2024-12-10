@@ -21,8 +21,7 @@ provider_to_query_func = {
     "openai": backend_openai.query,
     "anthropic": backend_anthropic.query,
     "gdm": backend_gdm.query,
-    "openrouter": backend_openrouter.query,
-    "llama": backend_llama.query
+    "openrouter": backend_openrouter.query
 }
 
 
