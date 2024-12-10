@@ -46,9 +46,9 @@ def query(
     filtered_kwargs: dict = select_values(notnone, model_kwargs)  # type: ignore
 
     if func_spec is not None:
-        raise NotImplementedError(
-            "We are not supporting function calling in OpenRouter for now."
-        )
+        filtered_kwargs["tools"] = [func_spec.as_openai_tool_dict]
+        # force the model the use the function
+        filtered_kwargs["tool_choice"] = func_spec.openai_tool_choice_dict
 
     # in case some backends dont support system roles, just convert everything to user
     messages = [
