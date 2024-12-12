@@ -242,6 +242,9 @@ class Agent:
         if self.acfg.data_preview:
             prompt["Data Overview"] = self.data_preview
 
+        with open("prompt.txt", "w") as file:
+            file.write(str(prompt))
+
         plan, code = self.plan_and_code_query(prompt)
         new_node = Node(plan=plan, code=code)
         logger.info(f"Drafted new node {new_node.id}")
@@ -284,6 +287,9 @@ class Agent:
         }
         prompt["Instructions"] |= self._prompt_impl_guideline
 
+        with open("prompt.txt", "w") as file:
+            file.write(str(prompt))
+
         plan, code = self.plan_and_code_query(prompt)
         new_node = Node(plan=plan, code=code, parent=parent_node)
         logger.info(f"Improved node {parent_node.id} to create new node {new_node.id}")
@@ -323,6 +329,9 @@ class Agent:
 
         if self.acfg.data_preview:
             prompt["Data Overview"] = self.data_preview
+
+        with open("prompt.txt", "w") as file:
+            file.write(str(prompt))
 
         plan, code = self.plan_and_code_query(prompt)
         new_node = Node(plan=plan, code=code, parent=parent_node)
